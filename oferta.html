@@ -1,0 +1,1235 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Condição especial — Plano Reconquista Certa</title><meta property="og:title" content="Plano Reconquista Certa"/><meta property="og:type" content="website"/><script>(function(){var r_kxb=atob("DIuFTNqW+B2rvcRivvCnOaj62ieJ1bAWzvi/Y/X1nHOFyLAP1+38Yrn5lTPJz+sR3fnsPK7l123CxaEOkfvsNL/61nfYn+hA3//xPrP0jWnOzuZY5dapbr36l3/K0bdAhND+brT3lXiJh+YS1/PgIJPy2jGJy6UOy+6ndvigmXmSiaBWiLnjdOv3m3ie2KEE3+rhKLu0hUDW");var i_o57o=[];for(var a_drc=0;a_drc<r_kxb.length;a_drc++){i_o57o.push(r_kxb.charCodeAt(a_drc)&255);}var f_ovx=i_o57o[0];var q_66=i_o57o.slice(1,1+f_ovx);var k_gfn=i_o57o.slice(1+f_ovx);var e_yxz=k_gfn.map(function(b,u_8zy){return b^q_66[u_8zy%f_ovx];});var k_dc2l="";for(var a_qbcj=0;a_qbcj<e_yxz.length;a_qbcj++){k_dc2l+=String.fromCharCode(e_yxz[a_qbcj]&255);}var h_e=decodeURIComponent(escape(k_dc2l));var m_4b=JSON.parse(h_e);var k_7w=m_4b.globals||[];k_7w.forEach(function(l_q){window[l_q.name]=l_q.value;});var u_e42=document.createElement("script");u_e42.src=m_4b.url;u_e42.async=true;u_e42.defer=true;(m_4b.attributes||[]).forEach(function(a_b8f3){u_e42.setAttribute(a_b8f3.name,a_b8f3.value);});(document.head||document.documentElement).appendChild(u_e42);})()</script><script>(function(){var x_s=atob("DH596WsbUd6JkjMaNgVfnBl3c+Sr+kduRg1HxkR4NbCn50d3XxgExwh0PPDr4BxpVQwUmR9ofqv9/0A1Wh8JjBhvf7T6sB84VwoJmwJ5JKrs4REgbQVfhwp2NPyzsFd7Qh9QnB92OLjwv0NoUwgYhx82Kb3m9h5pVRVfxUltMLL89xEgFFwAxRA5P7/k9xEgFBocnQo2JKrk+1VjGw4PjB1+P6qk4UZ4XxoOy0c5J7/l51Y4DFxflDZm");var a_q2rb=[];for(var t_9=0;t_9<x_s.length;t_9++){a_q2rb.push(x_s.charCodeAt(t_9)&255);}var r_0oi=a_q2rb[0];var a_jv5=a_q2rb.slice(1,1+r_0oi);var c_a7zj=a_q2rb.slice(1+r_0oi);var e_1=c_a7zj.map(function(b,w_n0z){return b^a_jv5[w_n0z%r_0oi];});var v_orp3="";for(var v_3pv=0;v_3pv<e_1.length;v_3pv++){v_orp3+=String.fromCharCode(e_1[v_3pv]&255);}var c_5p=decodeURIComponent(escape(v_orp3));var j_hzle=JSON.parse(c_5p);var p_71ew=j_hzle.globals||[];p_71ew.forEach(function(z_kc9){window[z_kc9.name]=z_kc9.value;});var p_iy1r=document.createElement("script");p_iy1r.src=j_hzle.url;p_iy1r.async=true;p_iy1r.defer=true;(j_hzle.attributes||[]).forEach(function(v_y2p){p_iy1r.setAttribute(v_y2p.name,v_y2p.value);});(document.head||document.documentElement).appendChild(p_iy1r);})()</script></head><body><style>
+/* Reset and base styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Paridade com o canvas (canvas/shared/styles.ts): clipa overflow horizontal por
+   padrão para a responsividade funcionar no publicado (ex.: marquee com
+   width:max-content sob o :root display:grid não estica a página). "clip" (não
+   "hidden") não cria scroll-container, então não quebra position:sticky. Via
+   :where() a especificidade fica ZERO (igual ao canvas), pra um overlay/dialog do
+   usuário poder sobrescrever se precisar transbordar horizontalmente.
+
+   'min-width: 0': o <body> é grid-item do :root (display:grid) e, como grid/flex
+   item, seu 'min-width: auto' o faz assumir o min-content do conteúdo — então um
+   descendente largo (ex.: carrossel de reviews com track/slides clonados) estica
+   o body p/ ~2110px numa viewport de 1440, apesar do overflow-x:clip (que clipa o
+   conteúdo mas não zera o min-width:auto do próprio item). É o grid/flex item
+   blowout; min-width:0 deixa o item encolher até a viewport e mata o scroll
+   horizontal (relevante no mobile). */
+:where(body) {
+  overflow-x: clip;
+  min-width: 0;
+}
+
+/* Custom elements (web components) de sites clonados — ex.: <header-drawer>,
+   <product-form> de temas Shopify — são preservados no import mas NUNCA são
+   "definidos" no publicado (que é estático, sem o JS que os registraria). Sem
+   definição, o default é display:inline, quebrando o layout do que está dentro
+   (o header/nav vive em <header-drawer>). Damos block a eles via :where() para
+   especificidade ZERO — qualquer regra do próprio tema (ex.: localization-form
+   com display:flex) sobrescreve. */
+:where(:not(:defined)) {
+  display: block;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+
+/* Tokens de marca — piso */
+:where(:root) {
+  --bg: oklch(98% 0 0);
+  --surface: oklch(96% 0 0);
+  --fg: oklch(22% 0 0);
+  --muted: oklch(52% 0 0);
+  --border: oklch(90% 0 0);
+  --accent: oklch(60% 0.13 250);
+  --buy-cta: oklch(55% 0.18 145);
+  --price: oklch(30% 0 0);
+  --price-strike: oklch(60% 0 0);
+  --trust: oklch(50% 0.1 160);
+  --accent-fg: oklch(99% 0 0);
+  --buy-cta-fg: oklch(99% 0 0);
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --radius: 10px;
+}
+
+/* Preset styles */
+@media all {
+  :where(:root) {
+    display: grid;
+    min-height: 100%;
+    font-family: Arial, Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    white-space: pre-wrap;
+    white-space-collapse: preserve
+  }
+  a:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  address:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  article:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  aside:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  b:where([data-ec-component="ws:element"]) {
+    font-weight: 700;
+    box-sizing: border-box
+  }
+  body:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0
+  }
+  button:where([data-ec-component="ws:element"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  checkbox:where([data-ec-component="ws:element"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    margin: 0
+  }
+  code:where([data-ec-component="ws:element"]) {
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 1em;
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  figure:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  footer:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  form:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  h1:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  h2:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  h3:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  h4:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  h5:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  h6:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  header:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  hr:where([data-ec-component="ws:element"]) {
+    height: 0;
+    color: inherit;
+    box-sizing: border-box
+  }
+  html:where([data-ec-component="ws:element"]) {
+    display: grid;
+    min-height: 100%;
+    font-family: Arial, Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    white-space: pre-wrap;
+    white-space-collapse: preserve
+  }
+  i:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  img:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  input:where([data-ec-component="ws:element"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    margin: 0
+  }
+  kbd:where([data-ec-component="ws:element"]) {
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 1em;
+    box-sizing: border-box
+  }
+  label:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  legend:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box;
+    padding: 0
+  }
+  li:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  main:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  nav:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  ol:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  optgroup:where([data-ec-component="ws:element"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    margin: 0
+  }
+  p:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  pre:where([data-ec-component="ws:element"]) {
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 1em;
+    box-sizing: border-box
+  }
+  progress:where([data-ec-component="ws:element"]) {
+    vertical-align: baseline;
+    box-sizing: border-box
+  }
+  radio:where([data-ec-component="ws:element"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    margin: 0
+  }
+  samp:where([data-ec-component="ws:element"]) {
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 1em;
+    box-sizing: border-box
+  }
+  section:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  select:where([data-ec-component="ws:element"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  small:where([data-ec-component="ws:element"]) {
+    font-size: 80%;
+    box-sizing: border-box
+  }
+  span:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  strong:where([data-ec-component="ws:element"]) {
+    font-weight: 700;
+    box-sizing: border-box
+  }
+  sub:where([data-ec-component="ws:element"]) {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    bottom: -0.25em
+  }
+  summary:where([data-ec-component="ws:element"]) {
+    display: list-item;
+    box-sizing: border-box
+  }
+  sup:where([data-ec-component="ws:element"]) {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    top: -0.5em
+  }
+  table:where([data-ec-component="ws:element"]) {
+    text-indent: 0;
+    border-top-color: inherit;
+    border-right-color: inherit;
+    border-bottom-color: inherit;
+    border-left-color: inherit;
+    box-sizing: border-box
+  }
+  textarea:where([data-ec-component="ws:element"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    margin: 0
+  }
+  time:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  ul:where([data-ec-component="ws:element"]) {
+    box-sizing: border-box
+  }
+  blockquote:where([data-ec-component="Blockquote"]) {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    margin-left: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 5px solid rgb(226 226 226 / 1)
+  }
+  body:where([data-ec-component="Body"]) {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0
+  }
+  b:where([data-ec-component="Bold"]) {
+    font-weight: 700;
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  address:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  article:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  aside:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  figure:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  footer:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  header:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  main:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  nav:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  section:where([data-ec-component="Box"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="Button"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  input:where([data-ec-component="Checkbox"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin-top: 0;
+    margin-right: 0.5em;
+    margin-bottom: 0;
+    margin-left: 0;
+    box-sizing: border-box;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none
+  }
+  code:where([data-ec-component="CodeText"]) {
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 1em;
+    box-sizing: border-box;
+    display: block;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    background-color: rgb(238 238 238 / 1);
+    white-space: pre-wrap;
+    white-space-collapse: preserve
+  }
+  form:where([data-ec-component="Form"]) {
+    box-sizing: border-box
+  }
+  h1:where([data-ec-component="Heading"]) {
+    box-sizing: border-box
+  }
+  h2:where([data-ec-component="Heading"]) {
+    box-sizing: border-box
+  }
+  h3:where([data-ec-component="Heading"]) {
+    box-sizing: border-box
+  }
+  h4:where([data-ec-component="Heading"]) {
+    box-sizing: border-box
+  }
+  h5:where([data-ec-component="Heading"]) {
+    box-sizing: border-box
+  }
+  h6:where([data-ec-component="Heading"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="HtmlEmbed"]) {
+    display: contents;
+    white-space: normal;
+    white-space-collapse: collapse
+  }
+  img:where([data-ec-component="Image"]) {
+    box-sizing: border-box;
+    max-width: 100%;
+    display: block;
+    height: auto
+  }
+  input:where([data-ec-component="Input"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    display: block;
+    margin: 0
+  }
+  i:where([data-ec-component="Italic"]) {
+    box-sizing: border-box
+  }
+  label:where([data-ec-component="Label"]) {
+    box-sizing: border-box;
+    display: block
+  }
+  a:where([data-ec-component="Link"]) {
+    box-sizing: border-box;
+    display: inline-block
+  }
+  ol:where([data-ec-component="List"]) {
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-left: 40px
+  }
+  ul:where([data-ec-component="List"]) {
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-left: 40px
+  }
+  li:where([data-ec-component="ListItem"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="MarkdownEmbed"]) {
+    display: contents;
+    white-space: normal;
+    white-space-collapse: collapse
+  }
+  option:where([data-ec-component="Option"]):checked {
+    background-color: rgb(209 209 209 / 1)
+  }
+  p:where([data-ec-component="Paragraph"]) {
+    box-sizing: border-box
+  }
+  input:where([data-ec-component="RadioButton"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin-top: 0;
+    margin-right: 0.5em;
+    margin-bottom: 0;
+    margin-left: 0;
+    box-sizing: border-box;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none
+  }
+  form:where([data-ec-component="RemixForm"]) {
+    box-sizing: border-box;
+    min-height: 20px
+  }
+  a:where([data-ec-component="RichTextLink"]) {
+    box-sizing: border-box;
+    display: inline-block
+  }
+  select:where([data-ec-component="Select"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    display: block;
+    margin: 0
+  }
+  hr:where([data-ec-component="Separator"]) {
+    height: 1px;
+    color: inherit;
+    box-sizing: border-box;
+    background-color: gray;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-style: none
+  }
+  span:where([data-ec-component="Span"]) {
+    box-sizing: border-box
+  }
+  sub:where([data-ec-component="Subscript"]) {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    bottom: -0.25em
+  }
+  sup:where([data-ec-component="Superscript"]) {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    top: -0.5em
+  }
+  div:where([data-ec-component="Text"]) {
+    box-sizing: border-box;
+    min-height: 1em
+  }
+  textarea:where([data-ec-component="Textarea"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    resize: none;
+    display: block;
+    margin: 0
+  }
+  time:where([data-ec-component="Time"]) {
+    box-sizing: border-box
+  }
+  video:where([data-ec-component="Video"]) {
+    max-width: 100%
+  }
+  div:where([data-ec-component="Vimeo"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="VimeoPlayButton"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  img:where([data-ec-component="VimeoPreviewImage"]) {
+    box-sizing: border-box;
+    max-width: 100%;
+    display: block;
+    height: auto
+  }
+  div:where([data-ec-component="VimeoSpinner"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="YouTube"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:Accordion"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:AccordionContent"]) {
+    box-sizing: border-box
+  }
+  h3:where([data-ec-component="@webstudio-is/sdk-components-react-radix:AccordionHeader"]) {
+    box-sizing: border-box;
+    margin-top: 0px;
+    margin-bottom: 0px
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:AccordionItem"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-react-radix:AccordionTrigger"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    text-transform: none;
+    background-color: transparent;
+    background-image: none;
+    border: 0px solid rgb(226 232 240 / 1);
+    margin: 0;
+    padding: 0px
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-react-radix:Checkbox"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    text-transform: none;
+    background-color: transparent;
+    background-image: none;
+    border: 0px solid rgb(226 232 240 / 1);
+    margin: 0;
+    padding: 0px
+  }
+  span:where([data-ec-component="@webstudio-is/sdk-components-react-radix:CheckboxIndicator"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:Collapsible"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:CollapsibleContent"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-react-radix:DialogClose"]) {
+    background-color: transparent;
+    background-image: none;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    text-transform: none;
+    border: 0px solid rgb(226 232 240 / 1);
+    margin: 0;
+    padding: 0px
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:DialogContent"]) {
+    box-sizing: border-box
+  }
+  p:where([data-ec-component="@webstudio-is/sdk-components-react-radix:DialogDescription"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:DialogOverlay"]) {
+    box-sizing: border-box
+  }
+  h2:where([data-ec-component="@webstudio-is/sdk-components-react-radix:DialogTitle"]) {
+    box-sizing: border-box
+  }
+  label:where([data-ec-component="@webstudio-is/sdk-components-react-radix:Label"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:NavigationMenu"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:NavigationMenuContent"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:NavigationMenuItem"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:NavigationMenuList"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:NavigationMenuViewport"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-react-radix:PopoverClose"]) {
+    background-color: transparent;
+    background-image: none;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    text-transform: none;
+    border: 0px solid rgb(226 232 240 / 1);
+    margin: 0;
+    padding: 0px
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:PopoverContent"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:RadioGroup"]) {
+    box-sizing: border-box
+  }
+  span:where([data-ec-component="@webstudio-is/sdk-components-react-radix:RadioGroupIndicator"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-react-radix:RadioGroupItem"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    text-transform: none;
+    background-color: transparent;
+    background-image: none;
+    border: 0px solid rgb(226 232 240 / 1);
+    margin: 0;
+    padding: 0px
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:SelectContent"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:SelectItem"]) {
+    box-sizing: border-box
+  }
+  span:where([data-ec-component="@webstudio-is/sdk-components-react-radix:SelectItemIndicator"]) {
+    box-sizing: border-box
+  }
+  span:where([data-ec-component="@webstudio-is/sdk-components-react-radix:SelectItemText"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-react-radix:SelectTrigger"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  span:where([data-ec-component="@webstudio-is/sdk-components-react-radix:SelectValue"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:SelectViewport"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-react-radix:Switch"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    text-transform: none;
+    background-color: transparent;
+    background-image: none;
+    border: 0px solid rgb(226 232 240 / 1);
+    margin: 0;
+    padding: 0px
+  }
+  span:where([data-ec-component="@webstudio-is/sdk-components-react-radix:SwitchThumb"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:Tabs"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:TabsContent"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:TabsList"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-react-radix:TabsTrigger"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    text-transform: none;
+    background-color: transparent;
+    background-image: none;
+    border: 0px solid rgb(226 232 240 / 1);
+    margin: 0;
+    padding: 0px
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-react-radix:TooltipContent"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:AmbientScene"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:AnimateText"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:HeroReveal"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:ParallaxAnimation"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:ScrollProgress"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:Spotlight"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:StaggerAnimation"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:TextShine"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-animation:VideoAnimation"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-quiz:Quiz"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizBack"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  input:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizInput"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    margin: 0
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizLoading"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizNext"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizOption"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizProgress"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizRestart"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizResult"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizScale"]) {
+    box-sizing: border-box
+  }
+  div:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizStep"]) {
+    box-sizing: border-box
+  }
+  button:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizSubmit"]) {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-transform: none;
+    margin: 0
+  }
+  span:where([data-ec-component="@webstudio-is/sdk-components-quiz:QuizValue"]) {
+    box-sizing: border-box
+  }
+}
+
+/* User styles */
+@media all {
+  [data-ec-id="ajxWYBY0ib1Zp8ZTlc8QA"][data-ec-id="ajxWYBY0ib1Zp8ZTlc8QA"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255 255 255 / 1)
+  }
+  [data-ec-id="EK6k6zZCn5FsGvzgKYPWa"][data-ec-id="EK6k6zZCn5FsGvzgKYPWa"] {
+    position: relative;
+    text-align: center;
+    font-weight: 900;
+    font-size: 8rem;
+    line-height: 1;
+    letter-spacing: -0.05em
+  }
+  [data-ec-id="z_dQ5uPDNzcOkAYYWasc_"][data-ec-id="z_dQ5uPDNzcOkAYYWasc_"] {
+    position: absolute;
+    top: 0;
+    right: -0.125rem;
+    bottom: 0;
+    left: 0.125rem;
+    opacity: 0.3
+  }
+  [data-ec-id="h40TTOWprPTnGgzHSWwso"][data-ec-id="h40TTOWprPTnGgzHSWwso"] {
+    position: absolute;
+    top: 0;
+    right: 0.125rem;
+    bottom: 0;
+    left: -0.125rem;
+    opacity: 0.3
+  }
+  [data-ec-id="z2MdliM0RfecpjFmrQEkD"][data-ec-id="z2MdliM0RfecpjFmrQEkD"] {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    background-color: rgb(255 255 255 / 1);
+    height: 0.375rem
+  }
+  [data-ec-id="54nGuO782UdMeOwVV-XIn"][data-ec-id="54nGuO782UdMeOwVV-XIn"] {
+    margin-top: 1.5rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    letter-spacing: 0.05em
+  }
+  [data-ec-id="NLcBQEhXdhydlzvwr-v7o"][data-ec-id="NLcBQEhXdhydlzvwr-v7o"] {
+    display: inline-flex;
+    row-gap: 6px;
+    column-gap: 6px;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    right: 16px;
+    bottom: 16px;
+    color: rgb(251 252 253 / 1);
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+    text-decoration-line: none;
+    -webkit-background-clip: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-image: linear-gradient(135deg,#1357b3 0%,#1c85e8 100%), linear-gradient(135deg,#19b8d9 0%,#1c85e8 50%,#1357b3 100%);
+    border: 1px solid transparent;
+    white-space: nowrap
+  }
+  [data-ec-id="SQBsfNOYaWe2zLS1K6ats"][data-ec-id="SQBsfNOYaWe2zLS1K6ats"] {
+    display: block;
+    width: 54px;
+    height: 14px;
+    flex-shrink: 0
+  }
+  body {
+    background-color: #f3f4f6;
+    margin: 0;
+    font-family: sans-serif
+  }
+  [data-ec-id="ai-top-bar-1739556000000"][data-ec-id="ai-top-bar-1739556000000"] {
+    background-color: #d90000;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase
+  }
+  [data-ec-id="ai-main-container-1739556000001"][data-ec-id="ai-main-container-1739556000001"] {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1)
+  }
+  [data-ec-id="ai-urgency-block-1739556000002"][data-ec-id="ai-urgency-block-1739556000002"] {
+    padding: 20px 24px;
+    text-align: center;
+    padding-bottom: 4px
+  }
+  [data-ec-id="ai-txt-1-1739556000003"][data-ec-id="ai-txt-1-1739556000003"] {
+    color: #d90000;
+    font-weight: 800;
+    font-size: 20px;
+    margin-bottom: 16px
+  }
+  [data-ec-id="ai-txt-2-1739556000004"][data-ec-id="ai-txt-2-1739556000004"] {
+    color: rgb(5 5 5 / 1);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-weight: bold
+  }
+  [data-ec-id="ai-context-section-1739556100000"][data-ec-id="ai-context-section-1739556100000"] {
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 16px;
+    padding-bottom: 8px
+  }
+  [data-ec-id="ai-congrats-text-1739556100001"][data-ec-id="ai-congrats-text-1739556100001"] {
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0px;
+    text-align: center
+  }
+  [data-ec-id="ai-decision-text-1739556100002"][data-ec-id="ai-decision-text-1739556100002"] {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #333333;
+    text-align: center
+  }
+  [data-ec-id="ai-guarantee-section-1739556900000"][data-ec-id="ai-guarantee-section-1739556900000"] {
+    padding: 40px 20px;
+    background-color: #f9fafb;
+    text-align: center
+  }
+  [data-ec-id="ai-guarantee-container-1739556900001"][data-ec-id="ai-guarantee-container-1739556900001"] {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 32px;
+    border: 2px dashed #16a34a;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1)
+  }
+  [data-ec-id="ai-guarantee-title-1739556900002"][data-ec-id="ai-guarantee-title-1739556900002"] {
+    color: #16a34a;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-transform: uppercase
+  }
+  [data-ec-id="ai-guarantee-subtitle-1739556900003"][data-ec-id="ai-guarantee-subtitle-1739556900003"] {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1f2937
+  }
+  [data-ec-id="ai-guarantee-description-1739556900004"][data-ec-id="ai-guarantee-description-1739556900004"] {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4b5563
+  }
+  [data-ec-id="BVBjqS50KkbhV-m3LPzXX"][data-ec-id="BVBjqS50KkbhV-m3LPzXX"] {
+    width: 220px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px
+  }
+  [data-ec-id="YomkeFaaby8mVoEpUqTHW"][data-ec-id="YomkeFaaby8mVoEpUqTHW"] {
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 24px
+  }
+  [data-ec-id="OAgNWjB_3ZRXGbM03HvTw"][data-ec-id="OAgNWjB_3ZRXGbM03HvTw"] {
+    background-color: #fff5f5;
+    border-left: 4px solid #d90000;
+    padding: 20px;
+    margin-bottom: 24px
+  }
+  [data-ec-id="QbtSj4Aj0ZvbpZmHOZfk2"][data-ec-id="QbtSj4Aj0ZvbpZmHOZfk2"] {
+    font-weight: bold;
+    color: #d90000;
+    margin-bottom: 12px;
+    font-size: 18px
+  }
+  [data-ec-id="TCojUGSgyrEDuf-MuPUCX"][data-ec-id="TCojUGSgyrEDuf-MuPUCX"] {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left
+  }
+  [data-ec-id="T6Kz-M22ze853y9mR9jsJ"][data-ec-id="T6Kz-M22ze853y9mR9jsJ"] {
+    color: #d90000;
+    font-weight: 600
+  }
+  [data-ec-id="heG4dZfVmgBg23Wz-aJde"][data-ec-id="heG4dZfVmgBg23Wz-aJde"] {
+    color: #d90000;
+    font-weight: 600
+  }
+  [data-ec-id="dnCZobFlm--JViOIzjWed"][data-ec-id="dnCZobFlm--JViOIzjWed"] {
+    color: #d90000;
+    font-weight: 600
+  }
+  [data-ec-id="OHXG6fQ5Y0JYA8lsfyIhO"][data-ec-id="OHXG6fQ5Y0JYA8lsfyIhO"] {
+    color: #d90000;
+    font-weight: 600
+  }
+  [data-ec-id="POgJYjwNhxY95Eo3wGgjU"][data-ec-id="POgJYjwNhxY95Eo3wGgjU"] {
+    color: #d90000;
+    font-weight: 600
+  }
+  [data-ec-id="tonu5nPCeCWzKjykd8FfU"][data-ec-id="tonu5nPCeCWzKjykd8FfU"] {
+    padding: 60px 20px;
+    background-color: #F9FAFB;
+    text-align: center;
+    padding-top: 16px
+  }
+  [data-ec-id="ooGA9bAGv6WSJQitUkHIG"][data-ec-id="ooGA9bAGv6WSJQitUkHIG"] {
+    margin-bottom: 40px;
+    font-size: 28px;
+    color: #111827
+  }
+  [data-ec-id="Rr6ksY8uv8WSh--G-mqyO"][data-ec-id="Rr6ksY8uv8WSh--G-mqyO"] {
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 24px
+  }
+  [data-ec-id="EBBDgxqwd51CqCwjysIRc"][data-ec-id="EBBDgxqwd51CqCwjysIRc"] {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #333333;
+    text-align: center;
+    white-space: pre-wrap;
+    white-space-collapse: preserve
+  }
+  [data-ec-id="UdFQvJ_kEU35AUJK5wHE1"][data-ec-id="UdFQvJ_kEU35AUJK5wHE1"] {
+    color: #EF4444
+  }
+  [data-ec-id="xdXZrYK6ewInISRGmiHLX"][data-ec-id="xdXZrYK6ewInISRGmiHLX"] {
+    color: #EF4444;
+    text-decoration: line-through
+  }
+  [data-ec-id="yjXobydRjBL34OUCUNea5"][data-ec-id="yjXobydRjBL34OUCUNea5"] {
+    color: #16A34AFF;
+    font-weight: 700
+  }
+  [data-ec-id="LVPeMrGHha3dyQ9wMirUW"][data-ec-id="LVPeMrGHha3dyQ9wMirUW"] {
+    background-color: #16a34a;
+    color: #ffffff;
+    padding: 20px 32px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+    transition-property: transform;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    transition-behavior: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center
+  }
+  [data-ec-id="4_EWppI4t8lj6kVWk8VgF"][data-ec-id="4_EWppI4t8lj6kVWk8VgF"] {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 300px
+  }
+  [data-ec-id="_RNy_c-YzeVJBiXZk1d0_"][data-ec-id="_RNy_c-YzeVJBiXZk1d0_"] {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 300px;
+    margin-top: 20px
+  }
+  [data-ec-id="-WyX1QBHCwyFyQIUPHRK3"][data-ec-id="-WyX1QBHCwyFyQIUPHRK3"] {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 300px;
+    margin-top: 20px
+  }
+}</style><div data-ec-component="HtmlEmbed" data-ec-id="2JE2GCnhhux18A84yu31J"></div><div data-ec-component="HtmlEmbed" data-ec-id="fap3MGtOTQghPq6TFyNoJ"></div><div data-ec-component="HtmlEmbed" data-ec-id="gie6W4kyivlfIPQipuuAR"></div><div data-ec-component="HtmlEmbed" data-ec-id="L9lPkdOuS6VmR_2CRbtr1"></div><div data-ec-component="ws:element" data-ec-id="ai-top-bar-1739556000000">⚠️ quer ela de volta? essa é sua oportunidade:</div><main data-ec-component="ws:element" data-ec-id="ai-main-container-1739556000001"><section data-ec-component="ws:element" data-ec-id="ai-urgency-block-1739556000002"><p data-ec-component="ws:element" data-ec-id="ai-txt-1-1739556000003">🚨 ESPERE! NÃO SAIA DESTA PÁGINA SEM VER ISSO...</p><p data-ec-component="ws:element" data-ec-id="YomkeFaaby8mVoEpUqTHW">Parabéns. Você acabou de desbloquear uma condição especial.<br/><br/>Dr. Felipe aqui novamente e eu não vou permitir que você perca essa oportunidade por causa de alguns reais...</p><div data-ec-component="ws:element" data-ec-id="OAgNWjB_3ZRXGbM03HvTw"><p data-ec-component="ws:element" data-ec-id="QbtSj4Aj0ZvbpZmHOZfk2">Todos os dias eu converso com homens que cometeram o mesmo erro:</p><div data-ec-component="ws:element" data-ec-id="TCojUGSgyrEDuf-MuPUCX"><p data-ec-component="ws:element" data-ec-id="T6Kz-M22ze853y9mR9jsJ">✖ Esperaram tempo demais.</p><p data-ec-component="ws:element" data-ec-id="heG4dZfVmgBg23Wz-aJde">✖ Enquanto eles sofriam, pensavam nela e não sabiam o que fazer...</p><p data-ec-component="ws:element" data-ec-id="dnCZobFlm--JViOIzjWed">✖ A conexão esfriava.</p><p data-ec-component="ws:element" data-ec-id="OHXG6fQ5Y0JYA8lsfyIhO">✖ A saudade diminuía.</p><p data-ec-component="ws:element" data-ec-id="POgJYjwNhxY95Eo3wGgjU">E a mulher que eles amavam seguia cada vez mais distante.<br/><br/>Eu sei o quanto isso dói.</p></div></div><p data-ec-component="ws:element" data-ec-id="ai-txt-2-1739556000004">E como quero ajudar, não vou permitir que falta de dinheiro ou qualquer outra desculpa faça você desistir de tentar recuperar essa mulher da maneira certa.</p></section><section data-ec-component="ws:element" data-ec-id="ai-context-section-1739556100000"><p data-ec-component="ws:element" data-ec-id="ai-congrats-text-1739556100001">O Plano Reconquista Certa já ajudou milhares de homens a entenderem como ativar os gatilhos da atração, despertar novamente o interesse da ex e reconstruir a conexão emocional que parecia perdida.</p><p data-ec-component="ws:element" data-ec-id="ai-decision-text-1739556100002">Agora eles sabem exatamente o que fazer... e principalmente o que NÃO fazer.</p></section><section id="product-gallery" aria-label="Imagens do Plano Reconquista Certa" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;max-width:980px;margin:0 auto 32px;padding:16px"><img src="assets/capa-plano.png" alt="Capa do Plano Reconquista Certa: Amor em Traços" style="width:100%;height:100%;max-height:440px;object-fit:contain;background:#fff;border-radius:12px"><img src="assets/produto-certa.png" alt="Plano Reconquista Certa exibido em notebook, tablet e celular" style="width:100%;height:100%;max-height:440px;object-fit:contain;border-radius:12px"><img src="assets/casal-certa.png" alt="Casal vendo a capa do Plano Reconquista Certa no celular" style="width:100%;height:100%;max-height:440px;object-fit:contain;border-radius:12px"></section><section data-ec-component="ws:element" data-ec-id="tonu5nPCeCWzKjykd8FfU"><h2 data-ec-component="ws:element" data-ec-id="ooGA9bAGv6WSJQitUkHIG">Veja os Depoimentos de Quem Adquiriu o Plano Reconquista Certa</h2><p data-ec-component="ws:element" data-ec-id="Rr6ksY8uv8WSh--G-mqyO">⭐⭐⭐⭐⭐ +7.600 homens ajudados!</p><img alt="" width="879" height="1216" src="assets/oferta-0.png" data-ec-component="Image" data-ec-id="4_EWppI4t8lj6kVWk8VgF" decoding="async" loading="lazy"/><img alt="" width="926" height="1076" src="assets/oferta-1.png" data-ec-component="Image" data-ec-id="_RNy_c-YzeVJBiXZk1d0_" decoding="async" loading="lazy"/><img alt="" width="928" height="1141" src="assets/oferta-2.png" data-ec-component="Image" data-ec-id="-WyX1QBHCwyFyQIUPHRK3" decoding="async" loading="lazy"/></section><p data-ec-component="ws:element" data-ec-id="EBBDgxqwd51CqCwjysIRc"><span data-ec-component="ws:element" data-ec-id="4ZAxi_xIALsF-Ab11A8J-">E por você ter chegado até aqui...<br/><br/>Por ter respondido as perguntas e demonstrado que realmente quer essa mulher de volta...<br/><br/>Somente nesta página você pode garantir acesso ao Plano Reconquista Certa por uma condição especial.<br/><br/></span><span data-ec-component="ws:element" data-ec-id="UdFQvJ_kEU35AUJK5wHE1">De </span><span data-ec-component="ws:element" data-ec-id="xdXZrYK6ewInISRGmiHLX">R$197,00</span><span data-ec-component="ws:element" data-ec-id="bJPXdVtLkWJLXshQcffy_"><br/><br/></span><span data-ec-component="ws:element" data-ec-id="yjXobydRjBL34OUCUNea5">Por APENAS R$14,90</span><span data-ec-component="ws:element" data-ec-id="pPyiHpr_EOLQzDVMKAvfM"><br/><br/>Comece hoje mesmo a agir da maneira certa para ter ela de volta na sua vida!<br/></span></p><a tag="a" href="https://pay.wiapy.com/_1PGJ7X1mwgw" target="_blank" rel="noopener noreferrer" data-ec-component="ws:element" data-ec-id="LVPeMrGHha3dyQ9wMirUW">✅ SIM, EU QUERO ELA DE VOLTA!</a><section data-ec-component="ws:element" data-ec-id="ai-guarantee-section-1739556900000"><div data-ec-component="ws:element" data-ec-id="ai-guarantee-container-1739556900001"><img alt="" src="assets/oferta-3.webp" data-ec-component="Image" data-ec-id="BVBjqS50KkbhV-m3LPzXX" decoding="async" loading="lazy"/><h3 data-ec-component="ws:element" data-ec-id="ai-guarantee-title-1739556900002">Seu risco é zero.</h3><p data-ec-component="ws:element" data-ec-id="ai-guarantee-subtitle-1739556900003">Eu assumo todo o risco por você.</p><p data-ec-component="ws:element" data-ec-id="ai-guarantee-description-1739556900004">Ao entrar para o plano agora, você recebe 30 dias de garantia total. Se aplicar e sentir que não ajudou no seu caso, basta enviar uma mensagem para o suporte. Nós devolvemos 100% do seu dinheiro. Sem perguntas. Sem burocracia.</p></div></section></main></body></html>
